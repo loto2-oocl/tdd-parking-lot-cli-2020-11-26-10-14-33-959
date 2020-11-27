@@ -96,4 +96,19 @@ class ParkingLotTest {
         assertEquals(ticket1, parkingLot.getCarTicketHashMap().get(car));
         assertNull(ticket2);
     }
+
+    @Test
+    void should_return_a_car_and_ticket_is_used_when_fetch_car_with_a_ticket_and_parked_in_parking_lot() {
+        // GIVEN
+        Car car = new Car();
+        ParkingLot parkingLot = new ParkingLot(1);
+        Ticket ticket = parkingLot.park(car);
+
+        // WHEN
+        Car actualCar = parkingLot.fetchCar(ticket);
+
+        // THEN
+        assertEquals(car, actualCar);
+        assertTrue(ticket.isUsed());
+    }
 }
