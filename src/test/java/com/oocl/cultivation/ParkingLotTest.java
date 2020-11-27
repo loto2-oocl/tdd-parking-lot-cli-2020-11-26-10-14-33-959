@@ -28,8 +28,8 @@ class ParkingLotTest {
         Ticket ticket = parkingLot.park(car);
 
         // THEN
-        assertTrue(parkingLot.getCarTicketHashMap().containsKey(car));
-        assertEquals(ticket, parkingLot.getCarTicketHashMap().get(car));
+        assertTrue(parkingLot.getCarTicketHashMap().containsKey(ticket));
+        assertEquals(car, parkingLot.getCarTicketHashMap().get(ticket));
     }
 
     @Test
@@ -57,10 +57,10 @@ class ParkingLotTest {
         Ticket ticket2 = parkingLot.park(car2);
 
         // THEN
-        assertTrue(parkingLot.getCarTicketHashMap().containsKey(car1));
-        assertTrue(parkingLot.getCarTicketHashMap().containsKey(car2));
-        assertEquals(ticket1, parkingLot.getCarTicketHashMap().get(car1));
-        assertEquals(ticket2, parkingLot.getCarTicketHashMap().get(car2));
+        assertTrue(parkingLot.getCarTicketHashMap().containsKey(ticket1));
+        assertTrue(parkingLot.getCarTicketHashMap().containsKey(ticket2));
+        assertEquals(car1, parkingLot.getCarTicketHashMap().get(ticket1));
+        assertEquals(car2, parkingLot.getCarTicketHashMap().get(ticket2));
     }
 
     @Test
@@ -75,9 +75,9 @@ class ParkingLotTest {
         Ticket ticket2 = parkingLot.park(car2);
 
         // THEN
-        assertTrue(parkingLot.getCarTicketHashMap().containsKey(car1));
-        assertFalse(parkingLot.getCarTicketHashMap().containsKey(car2));
-        assertEquals(ticket1, parkingLot.getCarTicketHashMap().get(car1));
+        assertTrue(parkingLot.getCarTicketHashMap().containsKey(ticket1));
+        assertFalse(parkingLot.getCarTicketHashMap().containsKey(ticket2));
+        assertEquals(car1, parkingLot.getCarTicketHashMap().get(ticket1));
         assertNull(ticket2);
     }
 
@@ -92,8 +92,8 @@ class ParkingLotTest {
         Ticket ticket2 = parkingLot.park(car);
 
         // THEN
-        assertTrue(parkingLot.getCarTicketHashMap().containsKey(car));
-        assertEquals(ticket1, parkingLot.getCarTicketHashMap().get(car));
+        assertTrue(parkingLot.getCarTicketHashMap().containsKey(ticket1));
+        assertEquals(car, parkingLot.getCarTicketHashMap().get(ticket1));
         assertNull(ticket2);
     }
 

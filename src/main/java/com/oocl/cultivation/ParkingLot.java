@@ -4,14 +4,14 @@ import java.util.HashMap;
 
 public class ParkingLot {
     private final Integer capacity;
-    private final HashMap<Car, Ticket> carTicketHashMap;
+    private final HashMap<Ticket, Car> carTicketHashMap;
 
     public ParkingLot(Integer capacity) {
         this.capacity = capacity;
-        this.carTicketHashMap = new HashMap<Car, Ticket>();
+        this.carTicketHashMap = new HashMap<Ticket, Car>();
     }
 
-    public HashMap<Car, Ticket> getCarTicketHashMap() {
+    public HashMap<Ticket, Car> getCarTicketHashMap() {
         return carTicketHashMap;
     }
 
@@ -20,12 +20,12 @@ public class ParkingLot {
             return null;
         }
 
-        if (this.getCarTicketHashMap().containsKey(car)) {
+        if (this.getCarTicketHashMap().containsValue(car)) {
             return null;
         }
 
         Ticket ticket = new Ticket();
-        carTicketHashMap.put(car, ticket);
+        carTicketHashMap.put(ticket, car);
         return ticket;
     }
 
