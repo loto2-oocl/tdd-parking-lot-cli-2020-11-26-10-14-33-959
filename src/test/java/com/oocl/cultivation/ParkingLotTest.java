@@ -126,4 +126,20 @@ class ParkingLotTest {
         assertNull(car);
         assertTrue(ticket.isUsed());
     }
+
+    @Test
+    void should_return_null_when_fetch_car_given_a_fake_ticket_and_parking_lot() {
+        // GIVEN
+        Ticket fakeTicket = new Ticket();
+        Car car = new Car();
+        ParkingLot parkingLot = new ParkingLot(1);
+        Ticket genuineTicket = parkingLot.park(car);
+
+        // WHEN
+        Car actualCar = parkingLot.fetchCar(fakeTicket);
+
+        // THEN
+        assertNull(actualCar);
+        assertNotEquals(genuineTicket, fakeTicket);
+    }
 }
