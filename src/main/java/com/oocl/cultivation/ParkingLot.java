@@ -1,5 +1,7 @@
 package com.oocl.cultivation;
 
+import com.oocl.cultivation.exception.UnrecognizedParkingTicketException;
+
 import java.util.HashMap;
 
 public class ParkingLot {
@@ -29,7 +31,7 @@ public class ParkingLot {
         return ticket;
     }
 
-    public Car fetchCar(Ticket ticket) {
+    public Car fetchCar(Ticket ticket) throws UnrecognizedParkingTicketException {
         if(ticket.isUsed()) {
             return null;
         }

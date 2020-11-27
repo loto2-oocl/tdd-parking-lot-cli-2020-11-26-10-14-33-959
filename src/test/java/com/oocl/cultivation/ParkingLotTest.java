@@ -1,5 +1,6 @@
 package com.oocl.cultivation;
 
+import com.oocl.cultivation.exception.UnrecognizedParkingTicketException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -98,7 +99,7 @@ class ParkingLotTest {
     }
 
     @Test
-    void should_return_a_car_and_ticket_is_used_when_fetch_car_with_a_ticket_and_parked_in_parking_lot() {
+    void should_return_a_car_and_ticket_is_used_when_fetch_car_with_a_ticket_and_parked_in_parking_lot() throws UnrecognizedParkingTicketException {
         // GIVEN
         Car car = new Car();
         ParkingLot parkingLot = new ParkingLot(1);
@@ -113,33 +114,36 @@ class ParkingLotTest {
     }
 
     @Test
-    void should_return_null_when_fetch_car_given_a_used_ticket_and_parking_lot() {
+    void should_throw_unrecognized_parking_ticket_exception_when_fetch_car_given_a_used_ticket_and_parking_lot() {
         // GIVEN
         Ticket ticket = new Ticket();
         ticket.setUsed();
         ParkingLot parkingLot = new ParkingLot(1);
 
-        // WHEN
-        Car car = parkingLot.fetchCar(ticket);
-
         // THEN
-        assertNull(car);
-        assertTrue(ticket.isUsed());
+        assertThrows(
+            UnrecognizedParkingTicketException.class,
+            () -> {
+                // WHEN
+                parkingLot.fetchCar(ticket);
+            }
+        );
     }
 
     @Test
-    void should_return_null_when_fetch_car_given_a_fake_ticket_and_parking_lot() {
+    void should_throw_unrecognized_parking_ticket_exception_when_fetch_car_given_a_fake_ticket_and_parking_lot() {
         // GIVEN
         Ticket fakeTicket = new Ticket();
-        Car car = new Car();
         ParkingLot parkingLot = new ParkingLot(1);
-        Ticket genuineTicket = parkingLot.park(car);
-
-        // WHEN
-        Car actualCar = parkingLot.fetchCar(fakeTicket);
 
         // THEN
-        assertNull(actualCar);
-        assertNotEquals(genuineTicket, fakeTicket);
+        assertThrows(
+            UnrecognizedParkingTicketException.class,
+            () -> {
+                // WHEN
+                parkingLot.fetchCar(fakeTicket);
+            }
+        );
+
     }
 }
