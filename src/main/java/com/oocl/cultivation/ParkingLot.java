@@ -1,5 +1,6 @@
 package com.oocl.cultivation;
 
+import com.oocl.cultivation.exception.NotEnoughPositionException;
 import com.oocl.cultivation.exception.UnrecognizedParkingTicketException;
 
 import java.util.HashMap;
@@ -17,7 +18,7 @@ public class ParkingLot {
         return ticketCarHashMap;
     }
 
-    public Ticket park(Car car) {
+    public Ticket park(Car car) throws NotEnoughPositionException{
         if (this.isParkingLotFull()) {
             return null;
         }
@@ -48,7 +49,7 @@ public class ParkingLot {
         return ticketCarHashMap.containsKey(ticket);
     }
 
-    public boolean isParkingLotFull() {
+    public boolean isParkingLotFull() throws NotEnoughPositionException {
         return (capacity - this.ticketCarHashMap.size()) <= 0;
     }
 }

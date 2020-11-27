@@ -1,5 +1,6 @@
 package com.oocl.cultivation;
 
+import com.oocl.cultivation.exception.NotEnoughPositionException;
 import com.oocl.cultivation.exception.UnrecognizedParkingTicketException;
 import org.junit.jupiter.api.Test;
 
@@ -7,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ParkingLotTest {
     @Test
-    void should_return_one_parking_ticket_when_park_the_car_given_a_car_and_enough_capacity() {
+    void should_return_one_parking_ticket_when_park_the_car_given_a_car_and_enough_capacity() throws NotEnoughPositionException {
         // GIVEN
         Car car = new Car();
         ParkingLot parkingLot = new ParkingLot(1);
@@ -20,7 +21,7 @@ class ParkingLotTest {
     }
 
     @Test
-    void should_parked_one_car_with_one_ticket_when_park_the_car_given_a_car_and_enough_capacity() {
+    void should_parked_one_car_with_one_ticket_when_park_the_car_given_a_car_and_enough_capacity() throws NotEnoughPositionException {
         // GIVEN
         Car car = new Car();
         ParkingLot parkingLot = new ParkingLot(10);
@@ -34,20 +35,24 @@ class ParkingLotTest {
     }
 
     @Test
-    void should_return_null_when_park_car_given_a_car_and_parking_lot_not_enough_capacity() {
+    void should_throw_not_enough_position_exception_when_park_car_given_a_car_and_parking_lot_not_enough_capacity()
+        throws NotEnoughPositionException {
         // GIVEN
         Car car = new Car();
         ParkingLot parkingLot = new ParkingLot(0);
 
-        // WHEN
-        Ticket ticket = parkingLot.park(car);
-
         // THEN
-        assertNull(ticket);
+        assertThrows(
+            NotEnoughPositionException.class,
+            () -> {
+                // WHEN
+                parkingLot.park(car);
+            }
+        );
     }
 
     @Test
-    void should_multiple_cars_parked_with_ticket_when_park_car_given_multiple_cars_and_enough_capacity() {
+    void should_multiple_cars_parked_with_ticket_when_park_car_given_multiple_cars_and_enough_capacity() throws NotEnoughPositionException {
         // GIVEN
         Car car1 = new Car();
         Car car2 = new Car();
@@ -65,7 +70,8 @@ class ParkingLotTest {
     }
 
     @Test
-    void should_park_one_car_only_with_one_ticket_when_park_car_given_two_cars_and_one_capacity() {
+    void should_park_one_car_only_with_one_ticket_and_throw_not_enough_position_exception_when_park_car_given_two_cars_and_one_capacity()
+        throws NotEnoughPositionException {
         // GIVEN
         Car car1 = new Car();
         Car car2 = new Car();
@@ -73,17 +79,23 @@ class ParkingLotTest {
 
         // WHEN
         Ticket ticket1 = parkingLot.park(car1);
-        Ticket ticket2 = parkingLot.park(car2);
 
         // THEN
         assertTrue(parkingLot.getTicketCarHashMap().containsKey(ticket1));
-        assertFalse(parkingLot.getTicketCarHashMap().containsKey(ticket2));
         assertEquals(car1, parkingLot.getTicketCarHashMap().get(ticket1));
-        assertNull(ticket2);
+
+        // THEN
+        assertThrows(
+            NotEnoughPositionException.class,
+            () -> {
+                // WHEN
+                parkingLot.park(car2);
+            }
+        );
     }
 
     @Test
-    void should_return_null_when_park_car_twice_with_same_car_given_a_car_and_enough_capacity() {
+    void should_return_null_when_park_car_twice_with_same_car_given_a_car_and_enough_capacity() throws NotEnoughPositionException {
         // GIVEN
         Car car = new Car();
         ParkingLot parkingLot = new ParkingLot(2);
@@ -99,7 +111,8 @@ class ParkingLotTest {
     }
 
     @Test
-    void should_return_a_car_and_ticket_is_used_when_fetch_car_with_a_ticket_and_parked_in_parking_lot() throws UnrecognizedParkingTicketException {
+    void should_return_a_car_and_ticket_is_used_when_fetch_car_with_a_ticket_and_parked_in_parking_lot()
+        throws UnrecognizedParkingTicketException, NotEnoughPositionException {
         // GIVEN
         Car car = new Car();
         ParkingLot parkingLot = new ParkingLot(1);

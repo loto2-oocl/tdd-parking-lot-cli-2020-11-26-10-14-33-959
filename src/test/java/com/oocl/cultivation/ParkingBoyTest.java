@@ -1,5 +1,6 @@
 package com.oocl.cultivation;
 
+import com.oocl.cultivation.exception.NotEnoughPositionException;
 import com.oocl.cultivation.exception.UnrecognizedParkingTicketException;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -9,7 +10,7 @@ import static org.mockito.Mockito.verify;
 
 class ParkingBoyTest {
     @Test
-    void should_parking_boy_call_parking_lot_park_function_when_park_the_car_given_parking_boy_with_parking_lot() {
+    void should_parking_boy_call_parking_lot_park_function_when_park_the_car_given_parking_boy_with_parking_lot() throws NotEnoughPositionException {
         // Given
         ParkingLot parkingLot = Mockito.mock(ParkingLot.class);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
