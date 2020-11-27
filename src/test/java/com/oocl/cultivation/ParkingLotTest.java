@@ -48,6 +48,7 @@ class ParkingLotTest {
                 // WHEN
                 parkingLot.park(car);
             }
+            , "Not enough position."
         );
     }
 
@@ -91,6 +92,7 @@ class ParkingLotTest {
                 // WHEN
                 parkingLot.park(car2);
             }
+            , "Not enough position."
         );
     }
 
