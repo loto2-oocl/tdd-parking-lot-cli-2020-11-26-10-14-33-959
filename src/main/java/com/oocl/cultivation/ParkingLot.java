@@ -20,7 +20,7 @@ public class ParkingLot {
 
     public Ticket park(Car car) throws NotEnoughPositionException{
         if (this.isParkingLotFull()) {
-            return null;
+            throw new NotEnoughPositionException();
         }
 
         if (this.getTicketCarHashMap().containsValue(car)) {
@@ -49,7 +49,7 @@ public class ParkingLot {
         return ticketCarHashMap.containsKey(ticket);
     }
 
-    public boolean isParkingLotFull() throws NotEnoughPositionException {
+    public boolean isParkingLotFull() {
         return (capacity - this.ticketCarHashMap.size()) <= 0;
     }
 }
