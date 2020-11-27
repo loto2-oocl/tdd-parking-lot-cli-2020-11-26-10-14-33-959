@@ -4,15 +4,15 @@ import java.util.HashMap;
 
 public class ParkingLot {
     private final Integer capacity;
-    private final HashMap<Ticket, Car> carTicketHashMap;
+    private final HashMap<Ticket, Car> ticketCarHashMap;
 
     public ParkingLot(Integer capacity) {
         this.capacity = capacity;
-        this.carTicketHashMap = new HashMap<Ticket, Car>();
+        this.ticketCarHashMap = new HashMap<Ticket, Car>();
     }
 
-    public HashMap<Ticket, Car> getCarTicketHashMap() {
-        return carTicketHashMap;
+    public HashMap<Ticket, Car> getTicketCarHashMap() {
+        return ticketCarHashMap;
     }
 
     public Ticket park(Car car) {
@@ -20,12 +20,12 @@ public class ParkingLot {
             return null;
         }
 
-        if (this.getCarTicketHashMap().containsValue(car)) {
+        if (this.getTicketCarHashMap().containsValue(car)) {
             return null;
         }
 
         Ticket ticket = new Ticket();
-        carTicketHashMap.put(ticket, car);
+        ticketCarHashMap.put(ticket, car);
         return ticket;
     }
 
@@ -34,6 +34,6 @@ public class ParkingLot {
     }
 
     public boolean isParkingLotFull() {
-        return (capacity - this.carTicketHashMap.size()) <= 0;
+        return (capacity - this.ticketCarHashMap.size()) <= 0;
     }
 }
