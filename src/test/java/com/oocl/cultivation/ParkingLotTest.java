@@ -80,4 +80,20 @@ class ParkingLotTest {
         assertEquals(ticket1, parkingLot.getCarTicketHashMap().get(car1));
         assertNull(ticket2);
     }
+
+    @Test
+    void should_return_null_when_park_car_twice_with_same_car_given_a_car_and_enough_capacity() {
+        // GIVEN
+        Car car = new Car();
+        ParkingLot parkingLot = new ParkingLot(2);
+
+        // WHEN
+        Ticket ticket1 = parkingLot.park(car);
+        Ticket ticket2 = parkingLot.park(car);
+
+        // THEN
+        assertTrue(parkingLot.getCarTicketHashMap().containsKey(car));
+        assertEquals(ticket1, parkingLot.getCarTicketHashMap().get(car));
+        assertNull(ticket2);
+    }
 }
