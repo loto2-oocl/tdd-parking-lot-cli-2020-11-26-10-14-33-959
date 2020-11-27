@@ -40,7 +40,8 @@ public class ParkingLot {
             ticket.setUsed();
             return ticketCarHashMap.remove(ticket);
         }
-        return null;
+
+        throw new UnrecognizedParkingTicketException();
     }
 
     public boolean isParkingLotFull() {
