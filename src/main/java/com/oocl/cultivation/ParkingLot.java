@@ -29,6 +29,10 @@ public class ParkingLot {
         return ticket;
     }
 
+    public Car fetchCar(Ticket ticket) {
+        return null;
+    }
+
     public boolean isParkingLotFull() {
         return (capacity - this.carTicketHashMap.size()) <= 0;
     }
