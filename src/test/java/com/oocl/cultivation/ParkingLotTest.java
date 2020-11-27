@@ -31,4 +31,17 @@ class ParkingLotTest {
         assertTrue(parkingLot.getCarTicketHashMap().containsKey(car));
         assertEquals(ticket, parkingLot.getCarTicketHashMap().get(car));
     }
+
+    @Test
+    void should_return_null_when_park_car_given_a_car_and_parking_lot_not_enough_capacity() {
+        // GIVEN
+        Car car = new Car();
+        ParkingLot parkingLot = new ParkingLot(0);
+
+        // WHEN
+        Ticket ticket = parkingLot.park(car);
+
+        // THEN
+        assertNull(ticket);
+    }
 }
