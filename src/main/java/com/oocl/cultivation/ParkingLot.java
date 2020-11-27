@@ -33,7 +33,7 @@ public class ParkingLot {
 
     public Car fetchCar(Ticket ticket) throws UnrecognizedParkingTicketException {
         if(ticket.isUsed()) {
-            return null;
+            throw new UnrecognizedParkingTicketException();
         }
 
         if (ticketCarHashMap.containsKey(ticket)) {
