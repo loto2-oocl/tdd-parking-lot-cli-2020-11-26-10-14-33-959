@@ -36,12 +36,16 @@ public class ParkingLot {
             throw new UnrecognizedParkingTicketException();
         }
 
-        if (ticketCarHashMap.containsKey(ticket)) {
+        if (this.isInParkingLot(ticket)) {
             ticket.setUsed();
-            return ticketCarHashMap.remove(ticket);
+            return this.ticketCarHashMap.remove(ticket);
         }
 
         throw new UnrecognizedParkingTicketException();
+    }
+
+    private boolean isInParkingLot(Ticket ticket) {
+        return ticketCarHashMap.containsKey(ticket);
     }
 
     public boolean isParkingLotFull() {
