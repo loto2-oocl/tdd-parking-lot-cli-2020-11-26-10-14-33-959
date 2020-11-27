@@ -16,6 +16,10 @@ public class ParkingLot {
     }
 
     public Ticket park(Car car) {
+        if((capacity - this.carTicketHashMap.size()) <= 0) {
+            return null;
+        }
+
         Ticket ticket = new Ticket();
         carTicketHashMap.put(car, ticket);
         return ticket;
