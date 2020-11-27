@@ -20,6 +20,10 @@ public class ParkingLot {
             return null;
         }
 
+        if (this.getCarTicketHashMap().containsKey(car)) {
+            return null;
+        }
+
         Ticket ticket = new Ticket();
         carTicketHashMap.put(car, ticket);
         return ticket;
