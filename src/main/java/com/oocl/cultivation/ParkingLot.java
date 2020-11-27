@@ -16,6 +16,8 @@ public class ParkingLot {
     }
 
     public Ticket park(Car car) {
-        return new Ticket();
+        Ticket ticket = new Ticket();
+        carTicketHashMap.put(car, ticket);
+        return ticket;
     }
 }
