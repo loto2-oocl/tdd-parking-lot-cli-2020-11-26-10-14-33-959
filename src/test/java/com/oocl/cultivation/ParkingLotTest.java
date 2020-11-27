@@ -35,8 +35,7 @@ class ParkingLotTest {
     }
 
     @Test
-    void should_throw_not_enough_position_exception_when_park_car_given_a_car_and_parking_lot_not_enough_capacity()
-        throws NotEnoughPositionException {
+    void should_throw_not_enough_position_exception_when_park_car_given_a_car_and_parking_lot_not_enough_capacity() {
         // GIVEN
         Car car = new Car();
         ParkingLot parkingLot = new ParkingLot(0);
@@ -142,6 +141,7 @@ class ParkingLotTest {
                 // WHEN
                 parkingLot.fetchCar(ticket);
             }
+            , "Unrecognized parking ticket."
         );
     }
 
@@ -158,6 +158,7 @@ class ParkingLotTest {
                 // WHEN
                 parkingLot.fetchCar(fakeTicket);
             }
+            , "Unrecognized parking ticket."
         );
 
     }
