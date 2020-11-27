@@ -32,7 +32,7 @@ public class ParkingLot {
     }
 
     public Car fetchCar(Ticket ticket) throws UnrecognizedParkingTicketException {
-        if(ticket.isUsed()) {
+        if (ticket.isUsed()) {
             throw new UnrecognizedParkingTicketException();
         }
 
