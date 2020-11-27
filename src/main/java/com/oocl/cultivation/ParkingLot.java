@@ -30,6 +30,10 @@ public class ParkingLot {
     }
 
     public Car fetchCar(Ticket ticket) {
+        if (ticketCarHashMap.containsKey(ticket)) {
+            ticket.setUsed();
+            return ticketCarHashMap.remove(ticket);
+        }
         return null;
     }
 
