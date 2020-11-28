@@ -8,6 +8,7 @@ import org.mockito.Mockito;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -44,6 +45,28 @@ class ParkingBoyTest {
 
         // THEN
         verify(parkingLot, times(1)).fetchCar(ticket);
+    }
+
+    @Test
+    void should_car_parked_at_second_parking_lot_when_park_car_given_a_car_and_parking_boy_with_two_parking_lot_with_only_second_has_enough_capacity()
+        throws NotEnoughPositionException {
+        // GIVEN
+        ParkingLot parkingLot1 = new ParkingLot(0);
+        ParkingLot parkingLot2 = new ParkingLot(10);
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(parkingLot1);
+        parkingLots.add(parkingLot2);
+
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        Car car = new Car();
+
+        // WHEN
+        Ticket ticket = parkingBoy.park(car);
+
+        // THEN
+        assertNotNull(ticket);
+        assertTrue(parkingLot2.getTicketCarHashMap().containsKey(ticket));
+        assertEquals(car, parkingLot2.getTicketCarHashMap().get(ticket));
     }
 }
 
