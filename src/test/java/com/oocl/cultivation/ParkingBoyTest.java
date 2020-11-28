@@ -48,6 +48,28 @@ class ParkingBoyTest {
     }
 
     @Test
+    void should_car_parked_at_first_parking_lot_when_park_car_given_a_car_and_parking_boy_with_two_parking_lot_at_enough_capacity()
+        throws NotEnoughPositionException {
+        // GIVEN
+        ParkingLot parkingLot1 = new ParkingLot(10);
+        ParkingLot parkingLot2 = new ParkingLot(10);
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(parkingLot1);
+        parkingLots.add(parkingLot2);
+
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        Car car = new Car();
+
+        // WHEN
+        Ticket ticket = parkingBoy.park(car);
+
+        // THEN
+        assertNotNull(ticket);
+        assertTrue(parkingLot1.getTicketCarHashMap().containsKey(ticket));
+        assertEquals(car, parkingLot1.getTicketCarHashMap().get(ticket));
+    }
+
+    @Test
     void should_car_parked_at_second_parking_lot_when_park_car_given_a_car_and_parking_boy_with_two_parking_lot_with_only_second_has_enough_capacity()
         throws NotEnoughPositionException {
         // GIVEN
