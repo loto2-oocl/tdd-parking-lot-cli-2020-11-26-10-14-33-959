@@ -5,6 +5,9 @@ import com.oocl.cultivation.exception.UnrecognizedParkingTicketException;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -13,7 +16,10 @@ class ParkingBoyTest {
     void should_parking_boy_call_parking_lot_park_function_when_park_the_car_given_parking_boy_with_parking_lot() throws NotEnoughPositionException {
         // Given
         ParkingLot parkingLot = Mockito.mock(ParkingLot.class);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(parkingLot);
+
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         Car car = new Car();
 
         // When
@@ -27,8 +33,10 @@ class ParkingBoyTest {
     void should_parking_boy_call_parking_lot_fetch_car_function_when_fetch_car_given_a_ticket_and_parking_boy_with_parking_lot()
         throws UnrecognizedParkingTicketException {
         // GIVEN
+        List<ParkingLot> parkingLots = new ArrayList<>();
         ParkingLot parkingLot = Mockito.mock(ParkingLot.class);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        parkingLots.add(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         Ticket ticket = new Ticket();
 
         // WHEN
