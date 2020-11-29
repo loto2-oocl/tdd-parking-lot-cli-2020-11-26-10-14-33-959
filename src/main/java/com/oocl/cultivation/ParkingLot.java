@@ -18,7 +18,7 @@ public class ParkingLot {
         return ticketCarHashMap;
     }
 
-    public Ticket park(Car car) throws NotEnoughPositionException{
+    public Ticket park(Car car) throws NotEnoughPositionException {
         if (this.isParkingLotFull()) {
             throw new NotEnoughPositionException();
         }
