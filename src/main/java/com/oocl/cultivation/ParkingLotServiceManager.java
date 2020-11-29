@@ -1,6 +1,7 @@
 package com.oocl.cultivation;
 
 import com.oocl.cultivation.exception.NotEnoughPositionException;
+import com.oocl.cultivation.exception.UnrecognizedParkingTicketException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ public class ParkingLotServiceManager extends ParkingBoy {
         return parkingBoy.park(car);
     }
 
-    public Car fetchCarWithAssignedParkingBoy(Ticket ticket, ParkingBoy parkingBoy) {
-        return null;
+    public Car fetchCarWithAssignedParkingBoy(Ticket ticket, ParkingBoy parkingBoy) throws UnrecognizedParkingTicketException {
+        return parkingBoy.fetchCar(ticket);
     }
 }
