@@ -29,4 +29,8 @@ public class ParkingLotServiceManager extends ParkingBoy {
     public Ticket parkWithAssignedParkingBoy(Car car, ParkingBoy parkingBoy) throws NotEnoughPositionException {
         return parkingBoy.park(car);
     }
+
+    public Car fetchCarWithAssignedParkingBoy(Ticket ticket, ParkingBoy parkingBoy) {
+        return null;
+    }
 }
