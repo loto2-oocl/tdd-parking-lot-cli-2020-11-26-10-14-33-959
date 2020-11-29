@@ -30,6 +30,10 @@ public class ParkingBoy {
     }
 
     public Car fetchCar(Ticket ticket) throws UnrecognizedParkingTicketException {
-        return this.parkingLots.get(0).fetchCar(ticket);
+        Optional<ParkingLot> targetedParkingLot = this.parkingLots.stream()
+            .filter(parkingLot -> parkingLot.isInParkingLot(ticket))
+            .findFirst();
+
+        return targetedParkingLot.get().fetchCar(ticket);
     }
 }

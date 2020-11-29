@@ -45,7 +45,7 @@ public class ParkingLot {
         throw new UnrecognizedParkingTicketException();
     }
 
-    private boolean isInParkingLot(Ticket ticket) {
+    public boolean isInParkingLot(Ticket ticket) {
         return ticketCarHashMap.containsKey(ticket);
     }
 
