@@ -60,4 +60,8 @@ public class ParkingLot {
     public Integer getRemainingCapacity() {
         return capacity - this.ticketCarHashMap.size();
     }
+
+    public Double getAvailablePositionRate() {
+        return (double)this.getRemainingCapacity() / this.capacity;
+    }
 }
