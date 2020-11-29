@@ -14,11 +14,6 @@ public class ParkingLotServiceManager extends StandardParkingBoy {
         this.managedParkingBoys = new ArrayList<>();
     }
 
-    public ParkingLotServiceManager(List<ParkingLot> parkingLots, List<StandardParkingBoy> parkingBoys) {
-        super(parkingLots);
-        this.managedParkingBoys = parkingBoys;
-    }
-
     public List<StandardParkingBoy> getManagedParkingBoys() {
         return managedParkingBoys;
     }
