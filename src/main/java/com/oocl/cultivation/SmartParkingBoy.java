@@ -1,7 +1,6 @@
 package com.oocl.cultivation;
 
-import com.oocl.cultivation.exception.NotEnoughPositionException;
-
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +11,7 @@ public class SmartParkingBoy extends ParkingBoy {
 
     @Override
     public Optional<ParkingLot> findAvailableParkingLot() {
-        return super.findAvailableParkingLot();
+        return this.parkingLots.stream()
+            .filter(ParkingLot::isParkingLotAvailable).max(Comparator.comparingInt(ParkingLot::getRemainingCapacity));
     }
 }
