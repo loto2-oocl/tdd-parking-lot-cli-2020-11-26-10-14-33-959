@@ -12,6 +12,6 @@ public class Ticket {
     }
 
     public boolean isUsed() {
-        return used;
+        return this.used;
     }
 }
