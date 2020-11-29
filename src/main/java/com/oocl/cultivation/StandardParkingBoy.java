@@ -6,10 +6,10 @@ import com.oocl.cultivation.exception.UnrecognizedParkingTicketException;
 import java.util.List;
 import java.util.Optional;
 
-public class ParkingBoy {
+public class StandardParkingBoy {
     protected final List<ParkingLot> parkingLots;
 
-    public ParkingBoy(List<ParkingLot> parkingLots) {
+    public StandardParkingBoy(List<ParkingLot> parkingLots) {
         this.parkingLots = parkingLots;
     }
 

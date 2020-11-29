@@ -11,7 +11,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class ParkingBoyTest {
+class StandardParkingBoyTest {
     @Test
     void should_parking_boy_call_parking_lot_park_function_when_park_the_car_given_parking_boy_with_one_parking_lot()
         throws NotEnoughPositionException {
@@ -21,11 +21,11 @@ class ParkingBoyTest {
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(parkingLot);
 
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
         Car car = new Car();
 
         // When
-        parkingBoy.park(car);
+        standardParkingBoy.park(car);
 
         // Then
         verify(parkingLot, times(1)).park(car);
@@ -38,12 +38,12 @@ class ParkingBoyTest {
         List<ParkingLot> parkingLots = new ArrayList<>();
         ParkingLot parkingLot = Mockito.mock(ParkingLot.class);
         parkingLots.add(parkingLot);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
         Ticket ticket = new Ticket();
         when(parkingLot.isInParkingLot(ticket)).thenReturn(true);
 
         // WHEN
-        parkingBoy.fetchCar(ticket);
+        standardParkingBoy.fetchCar(ticket);
 
         // THEN
         verify(parkingLot, times(1)).fetchCar(ticket);
@@ -59,11 +59,11 @@ class ParkingBoyTest {
         parkingLots.add(parkingLot1);
         parkingLots.add(parkingLot2);
 
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
         Car car = new Car();
 
         // WHEN
-        Ticket ticket = parkingBoy.park(car);
+        Ticket ticket = standardParkingBoy.park(car);
 
         // THEN
         assertNotNull(ticket);
@@ -81,11 +81,11 @@ class ParkingBoyTest {
         parkingLots.add(parkingLot1);
         parkingLots.add(parkingLot2);
 
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
         Car car = new Car();
 
         // WHEN
-        Ticket ticket = parkingBoy.park(car);
+        Ticket ticket = standardParkingBoy.park(car);
 
         // THEN
         assertNotNull(ticket);
@@ -102,7 +102,7 @@ class ParkingBoyTest {
         parkingLots.add(parkingLot1);
         parkingLots.add(parkingLot2);
 
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
         Car car = new Car();
 
         // THEN
@@ -110,7 +110,7 @@ class ParkingBoyTest {
             NotEnoughPositionException.class,
             () -> {
                 // WHEN
-                parkingBoy.park(car);
+                standardParkingBoy.park(car);
             }
             , "Not enough position."
         );
@@ -128,10 +128,10 @@ class ParkingBoyTest {
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(parkingLot1);
         parkingLots.add(parkingLot2);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
 
         // WHEN
-        Car actual = parkingBoy.fetchCar(ticket);
+        Car actual = standardParkingBoy.fetchCar(ticket);
 
         // THEN
         assertEquals(car, actual);
@@ -146,7 +146,7 @@ class ParkingBoyTest {
         parkingLots.add(parkingLot1);
         parkingLots.add(parkingLot2);
 
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
 
         Ticket fakeTicket = new Ticket();
 
@@ -155,7 +155,7 @@ class ParkingBoyTest {
             UnrecognizedParkingTicketException.class,
             () -> {
                 // WHEN
-                parkingBoy.fetchCar(fakeTicket);
+                standardParkingBoy.fetchCar(fakeTicket);
             }
             , "Unrecognized parking ticket."
         );

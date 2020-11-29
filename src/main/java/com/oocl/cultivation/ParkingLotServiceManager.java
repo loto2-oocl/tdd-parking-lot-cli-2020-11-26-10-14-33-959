@@ -6,32 +6,32 @@ import com.oocl.cultivation.exception.UnrecognizedParkingTicketException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParkingLotServiceManager extends ParkingBoy {
-    private final List<ParkingBoy> managedParkingBoys;
+public class ParkingLotServiceManager extends StandardParkingBoy {
+    private final List<StandardParkingBoy> managedParkingBoys;
 
     public ParkingLotServiceManager(List<ParkingLot> parkingLots) {
         super(parkingLots);
         this.managedParkingBoys = new ArrayList<>();
     }
 
-    public ParkingLotServiceManager(List<ParkingLot> parkingLots, List<ParkingBoy> parkingBoys) {
+    public ParkingLotServiceManager(List<ParkingLot> parkingLots, List<StandardParkingBoy> parkingBoys) {
         super(parkingLots);
         this.managedParkingBoys = parkingBoys;
     }
 
-    public List<ParkingBoy> getManagedParkingBoys() {
+    public List<StandardParkingBoy> getManagedParkingBoys() {
         return managedParkingBoys;
     }
 
-    public void appendParkingBoy(ParkingBoy parkingBoy) {
+    public void appendParkingBoy(StandardParkingBoy parkingBoy) {
         this.getManagedParkingBoys().add(parkingBoy);
     }
 
-    public Ticket parkWithAssignedParkingBoy(Car car, ParkingBoy parkingBoy) throws NotEnoughPositionException {
+    public Ticket parkWithAssignedParkingBoy(Car car, StandardParkingBoy parkingBoy) throws NotEnoughPositionException {
         return parkingBoy.park(car);
     }
 
-    public Car fetchCarWithAssignedParkingBoy(Ticket ticket, ParkingBoy parkingBoy) throws UnrecognizedParkingTicketException {
+    public Car fetchCarWithAssignedParkingBoy(Ticket ticket, StandardParkingBoy parkingBoy) throws UnrecognizedParkingTicketException {
         return parkingBoy.fetchCar(ticket);
     }
 }
