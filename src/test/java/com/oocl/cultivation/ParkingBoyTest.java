@@ -136,5 +136,30 @@ class ParkingBoyTest {
         // THEN
         assertEquals(car, actual);
     }
+
+    @Test
+    void should_throw_unrecognized_ticket_exception_when_fetch_car_given_a_fake_ticket_and_parking_boy_with_two_empty_parking_lots() {
+        // GIVEN
+        ParkingLot parkingLot1 = new ParkingLot(10);
+        ParkingLot parkingLot2 = new ParkingLot(10);
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(parkingLot1);
+        parkingLots.add(parkingLot2);
+
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+
+        Ticket fakeTicket = new Ticket();
+
+        // THEN
+        assertThrows(
+            UnrecognizedParkingTicketException.class,
+            () -> {
+                // WHEN
+                parkingBoy.fetchCar(fakeTicket);
+            }
+            , "Unrecognized parking ticket."
+        );
+
+    }
 }
 
