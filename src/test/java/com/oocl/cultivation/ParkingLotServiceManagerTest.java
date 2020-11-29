@@ -10,7 +10,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 public class ParkingLotServiceManagerTest {
     @Test
@@ -74,6 +75,25 @@ public class ParkingLotServiceManagerTest {
                 parkingLotServiceManager.parkWithAssignedParkingBoy(new Car(), parkingBoy);
             }
             , "Not Enough Position."
+        );
+    }
+
+    @Test
+    void should_throw_unrecognized_ticket_exception_when_fetch_car_with_assigned_parking_boy_given_a_fake_ticket_a_manager_and_parking_boy() {
+        // GIVEN
+        ParkingBoy parkingBoy = new ParkingBoy(new ArrayList<>());
+        ParkingLotServiceManager parkingLotServiceManager = new ParkingLotServiceManager(new ArrayList<>());
+        parkingLotServiceManager.appendParkingBoy(parkingBoy);
+        Ticket fakeTicket = new Ticket();
+
+        // THEN
+        assertThrows(
+            UnrecognizedParkingTicketException.class,
+            () -> {
+                // WHEN
+                parkingLotServiceManager.fetchCarWithAssignedParkingBoy(fakeTicket, parkingBoy);
+            }
+            , "Unrecognized parking ticket."
         );
     }
 }
