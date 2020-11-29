@@ -23,13 +23,17 @@ public class ParkingLot {
             throw new NotEnoughPositionException();
         }
 
-        if (this.getTicketCarHashMap().containsValue(car)) {
+        if (isParkedInThisParkingLot(car)) {
             return null;
         }
 
         Ticket ticket = new Ticket();
         ticketCarHashMap.put(ticket, car);
         return ticket;
+    }
+
+    private boolean isParkedInThisParkingLot(Car car) {
+        return this.getTicketCarHashMap().containsValue(car);
     }
 
     public Car fetchCar(Ticket ticket) throws UnrecognizedParkingTicketException {
