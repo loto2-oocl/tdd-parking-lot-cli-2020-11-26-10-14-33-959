@@ -6,7 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
@@ -52,5 +54,26 @@ public class ParkingLotServiceManagerTest {
 
         // Then
         verify(parkingBoy, times(1)).fetchCar(ticket);
+    }
+
+    @Test
+    void should_throw_not_enough_position_exception_when_park_with_assigned_parking_boy_given_a_car_a_manager_and_parking_boy() {
+        // GIVEN
+        ParkingLot parkingLot1 = new ParkingLot(0);
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(parkingLot1);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        ParkingLotServiceManager parkingLotServiceManager = new ParkingLotServiceManager(new ArrayList<>());
+        parkingLotServiceManager.appendParkingBoy(parkingBoy);
+
+        // THEN
+        assertThrows(
+            NotEnoughPositionException.class,
+            () -> {
+                // WHEN
+                parkingLotServiceManager.parkWithAssignedParkingBoy(new Car(), parkingBoy);
+            }
+            , "Not Enough Position."
+        );
     }
 }
