@@ -40,6 +40,7 @@ class ParkingBoyTest {
         parkingLots.add(parkingLot);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         Ticket ticket = new Ticket();
+        when(parkingLot.isInParkingLot(ticket)).thenReturn(true);
 
         // WHEN
         parkingBoy.fetchCar(ticket);
