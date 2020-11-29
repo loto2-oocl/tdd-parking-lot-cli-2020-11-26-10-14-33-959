@@ -114,5 +114,26 @@ class ParkingBoyTest {
             , "Not enough position."
         );
     }
+
+    @Test
+    void should_fetch_car_from_second_car_park_when_fetch_car_given_a_ticket_and_parking_boy_with_two_parking_lot_and_one_parked_the_target_car()
+        throws NotEnoughPositionException, UnrecognizedParkingTicketException {
+        // GIVEN
+        Car car = new Car();
+        ParkingLot parkingLot1 = new ParkingLot(1);
+        ParkingLot parkingLot2 = new ParkingLot(1);
+        Ticket ticket = parkingLot2.park(car);
+
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(parkingLot1);
+        parkingLots.add(parkingLot2);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+
+        // WHEN
+        Car actual = parkingBoy.fetchCar(ticket);
+
+        // THEN
+        assertEquals(car, actual);
+    }
 }
 
