@@ -14,7 +14,8 @@ import static org.mockito.Mockito.verify;
 
 class ParkingBoyTest {
     @Test
-    void should_parking_boy_call_parking_lot_park_function_when_park_the_car_given_parking_boy_with_one_parking_lot() throws NotEnoughPositionException {
+    void should_parking_boy_call_parking_lot_park_function_when_park_the_car_given_parking_boy_with_one_parking_lot()
+        throws NotEnoughPositionException {
         // Given
         ParkingLot parkingLot = Mockito.mock(ParkingLot.class);
         List<ParkingLot> parkingLots = new ArrayList<>();
@@ -89,6 +90,29 @@ class ParkingBoyTest {
         assertNotNull(ticket);
         assertTrue(parkingLot2.getTicketCarHashMap().containsKey(ticket));
         assertEquals(car, parkingLot2.getTicketCarHashMap().get(ticket));
+    }
+
+    @Test
+    void should_throw_not_enough_position_exception_when_park_car_give_a_car_and_parking_boy_with_two_parking_lot_with_not_enough_capacity() {
+        // GIVEN
+        ParkingLot parkingLot1 = new ParkingLot(0);
+        ParkingLot parkingLot2 = new ParkingLot(0);
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(parkingLot1);
+        parkingLots.add(parkingLot2);
+
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        Car car = new Car();
+
+        // THEN
+        assertThrows(
+            NotEnoughPositionException.class,
+            () -> {
+                // WHEN
+                parkingBoy.park(car);
+            }
+            , "Not enough position."
+        );
     }
 }
 
