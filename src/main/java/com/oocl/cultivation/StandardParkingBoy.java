@@ -25,8 +25,12 @@ public class StandardParkingBoy {
         return parkingLots;
     }
 
+    public ParkingStrategy getParkingStrategy() {
+        return parkingStrategy;
+    }
+
     public Ticket park(Car car) throws NotEnoughPositionException {
-        Optional<ParkingLot> availableParkingLot = this.parkingStrategy.findAvailableParkingLot(this.getParkingLots());
+        Optional<ParkingLot> availableParkingLot = this.getParkingStrategy().findAvailableParkingLot(this.getParkingLots());
 
         if (!availableParkingLot.isPresent()) {
             throw new NotEnoughPositionException();
