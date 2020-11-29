@@ -23,4 +23,8 @@ public class ParkingLotServiceManager extends ParkingBoy {
     public void appendParkingBoy(ParkingBoy parkingBoy) {
         this.getManagedParkingBoys().add(parkingBoy);
     }
+
+    public Ticket parkWithAssignedParkingBoy(Car car, ParkingBoy parkingBoy) {
+        return null;
+    }
 }

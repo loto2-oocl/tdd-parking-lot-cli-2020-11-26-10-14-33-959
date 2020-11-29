@@ -1,10 +1,14 @@
 package com.oocl.cultivation;
 
+import com.oocl.cultivation.exception.NotEnoughPositionException;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.*;
 
 public class ParkingLotServiceManagerTest {
     @Test
@@ -18,5 +22,20 @@ public class ParkingLotServiceManagerTest {
 
         // THEN
         assertTrue(parkingLotServiceManager.getManagedParkingBoys().contains(parkingBoy));
+    }
+
+    @Test
+    void should_assigned_parking_boy_call_park_once_when_park_with_assigned_parking_boy_given_a_car_and_a_manager_and_a_parking_boy()
+        throws NotEnoughPositionException {
+        // GIVEN
+        ParkingBoy parkingBoy = Mockito.mock(ParkingBoy.class);
+        ParkingLotServiceManager parkingLotServiceManager = new ParkingLotServiceManager(new ArrayList<>());
+        Car car = new Car();
+
+        // WHEN
+        parkingLotServiceManager.parkWithAssignedParkingBoy(car, parkingBoy);
+
+        // Then
+        verify(parkingBoy, times(1)).park(car);
     }
 }
