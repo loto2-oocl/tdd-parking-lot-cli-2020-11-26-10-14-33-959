@@ -50,7 +50,7 @@ public class StandardParkingBoy {
     }
 
     private Optional<ParkingLot> getCarParkedParkingLot(Ticket ticket) {
-        return this.parkingLots.stream()
+        return this.getParkingLots().stream()
             .filter(parkingLot -> parkingLot.isInParkingLot(ticket))
             .findFirst();
     }
