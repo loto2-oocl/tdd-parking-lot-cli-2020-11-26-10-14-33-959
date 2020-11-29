@@ -1,5 +1,7 @@
 package com.oocl.cultivation;
 
+import com.oocl.cultivation.exception.NotEnoughPositionException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +26,7 @@ public class ParkingLotServiceManager extends ParkingBoy {
         this.getManagedParkingBoys().add(parkingBoy);
     }
 
-    public Ticket parkWithAssignedParkingBoy(Car car, ParkingBoy parkingBoy) {
-        return null;
+    public Ticket parkWithAssignedParkingBoy(Car car, ParkingBoy parkingBoy) throws NotEnoughPositionException {
+        return parkingBoy.park(car);
     }
 }
