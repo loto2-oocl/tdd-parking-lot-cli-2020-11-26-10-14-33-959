@@ -23,7 +23,7 @@ public class ParkingBoy {
         return availableParkingLot.get().park(car);
     }
 
-    private Optional<ParkingLot> findAvailableParkingLot() {
+    public Optional<ParkingLot> findAvailableParkingLot() {
         return this.parkingLots.stream()
             .filter(ParkingLot::isParkingLotAvailable)
             .findFirst();
