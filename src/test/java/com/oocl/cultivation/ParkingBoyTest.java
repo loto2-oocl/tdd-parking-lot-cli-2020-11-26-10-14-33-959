@@ -9,8 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 class ParkingBoyTest {
     @Test
@@ -18,6 +17,7 @@ class ParkingBoyTest {
         throws NotEnoughPositionException {
         // Given
         ParkingLot parkingLot = Mockito.mock(ParkingLot.class);
+        when(parkingLot.isParkingLotAvaialble()).thenReturn(true);
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(parkingLot);
 
