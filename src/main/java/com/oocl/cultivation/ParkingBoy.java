@@ -34,6 +34,10 @@ public class ParkingBoy {
             .filter(parkingLot -> parkingLot.isInParkingLot(ticket))
             .findFirst();
 
+        if (!targetedParkingLot.isPresent()) {
+            throw new UnrecognizedParkingTicketException();
+        }
+
         return targetedParkingLot.get().fetchCar(ticket);
     }
 }
