@@ -40,14 +40,18 @@ public class StandardParkingBoy {
     }
 
     public Car fetchCar(Ticket ticket) throws UnrecognizedParkingTicketException {
-        Optional<ParkingLot> targetedParkingLot = this.parkingLots.stream()
-            .filter(parkingLot -> parkingLot.isInParkingLot(ticket))
-            .findFirst();
+        Optional<ParkingLot> targetedParkingLot = getCarParkedParkingLot(ticket);
 
         if (!targetedParkingLot.isPresent()) {
             throw new UnrecognizedParkingTicketException();
         }
 
         return targetedParkingLot.get().fetchCar(ticket);
+    }
+
+    private Optional<ParkingLot> getCarParkedParkingLot(Ticket ticket) {
+        return this.parkingLots.stream()
+            .filter(parkingLot -> parkingLot.isInParkingLot(ticket))
+            .findFirst();
     }
 }
