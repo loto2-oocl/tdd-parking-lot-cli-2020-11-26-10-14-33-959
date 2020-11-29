@@ -25,7 +25,7 @@ public class ParkingBoy {
 
     private Optional<ParkingLot> findAvailableParkingLot() {
         return this.parkingLots.stream()
-            .filter(ParkingLot::isParkingLotAvaialble)
+            .filter(ParkingLot::isParkingLotAvailable)
             .findFirst();
     }
 

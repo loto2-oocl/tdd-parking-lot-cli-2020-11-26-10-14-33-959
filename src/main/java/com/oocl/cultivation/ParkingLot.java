@@ -53,7 +53,7 @@ public class ParkingLot {
         return (capacity - this.ticketCarHashMap.size()) <= 0;
     }
 
-    public boolean isParkingLotAvaialble() {
+    public boolean isParkingLotAvailable() {
         return !this.isParkingLotFull();
     }
 }

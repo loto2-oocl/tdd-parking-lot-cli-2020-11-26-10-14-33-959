@@ -17,7 +17,7 @@ class ParkingBoyTest {
         throws NotEnoughPositionException {
         // Given
         ParkingLot parkingLot = Mockito.mock(ParkingLot.class);
-        when(parkingLot.isParkingLotAvaialble()).thenReturn(true);
+        when(parkingLot.isParkingLotAvailable()).thenReturn(true);
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(parkingLot);
 
