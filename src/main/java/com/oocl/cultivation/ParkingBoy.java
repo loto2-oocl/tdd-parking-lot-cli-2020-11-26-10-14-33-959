@@ -17,6 +17,10 @@ public class ParkingBoy {
             .filter(parkingLot -> !parkingLot.isParkingLotFull())
             .findFirst().orElse(null);
 
+        if (availableParkingLot == null) {
+            throw new NotEnoughPositionException();
+        }
+
         return availableParkingLot.park(car);
     }
 
