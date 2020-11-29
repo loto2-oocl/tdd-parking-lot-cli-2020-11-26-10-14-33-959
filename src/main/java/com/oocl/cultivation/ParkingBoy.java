@@ -13,15 +13,19 @@ public class ParkingBoy {
     }
 
     public Ticket park(Car car) throws NotEnoughPositionException {
-        ParkingLot availableParkingLot = this.parkingLots.stream()
-            .filter(parkingLot -> !parkingLot.isParkingLotFull())
-            .findFirst().orElse(null);
+        ParkingLot availableParkingLot = this.findAvailableParkingLot();
 
         if (availableParkingLot == null) {
             throw new NotEnoughPositionException();
         }
 
         return availableParkingLot.park(car);
+    }
+
+    private ParkingLot findAvailableParkingLot() {
+        return this.parkingLots.stream()
+            .filter(parkingLot -> !parkingLot.isParkingLotFull())
+            .findFirst().orElse(null);
     }
 
     public Car fetchCar(Ticket ticket) throws UnrecognizedParkingTicketException {
