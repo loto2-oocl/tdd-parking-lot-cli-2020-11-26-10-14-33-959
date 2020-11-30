@@ -15,7 +15,7 @@ public class ParkingLot {
     }
 
     public HashMap<Ticket, Car> getTicketCarHashMap() {
-        return ticketCarHashMap;
+        return this.ticketCarHashMap;
     }
 
     public Ticket park(Car car) throws NotEnoughPositionException {
@@ -24,7 +24,7 @@ public class ParkingLot {
         }
 
         Ticket ticket = new Ticket();
-        ticketCarHashMap.put(ticket, car);
+        this.ticketCarHashMap.put(ticket, car);
         return ticket;
     }
 
@@ -42,11 +42,11 @@ public class ParkingLot {
     }
 
     public boolean isInParkingLot(Ticket ticket) {
-        return ticketCarHashMap.containsKey(ticket);
+        return this.ticketCarHashMap.containsKey(ticket);
     }
 
     public boolean isParkingLotFull() {
-        return (capacity - this.ticketCarHashMap.size()) <= 0;
+        return (this.getRemainingCapacity()) <= 0;
     }
 
     public boolean isParkingLotAvailable() {
@@ -54,7 +54,7 @@ public class ParkingLot {
     }
 
     public Integer getRemainingCapacity() {
-        return capacity - this.ticketCarHashMap.size();
+        return this.capacity - this.ticketCarHashMap.size();
     }
 
     public Double getAvailablePositionRate() {

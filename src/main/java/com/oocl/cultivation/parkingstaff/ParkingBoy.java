@@ -23,11 +23,11 @@ public class ParkingBoy {
     }
 
     public List<ParkingLot> getParkingLots() {
-        return parkingLots;
+        return this.parkingLots;
     }
 
     public ParkingStrategy getParkingStrategy() {
-        return parkingStrategy;
+        return this.parkingStrategy;
     }
 
     protected Optional<ParkingLot> getCarParkedParkingLot(Ticket ticket) {

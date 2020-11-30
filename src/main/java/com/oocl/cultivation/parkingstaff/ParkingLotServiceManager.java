@@ -20,7 +20,7 @@ public class ParkingLotServiceManager extends ParkingBoy {
     }
 
     public List<ParkingBoy> getManagedParkingBoys() {
-        return managedParkingBoys;
+        return this.managedParkingBoys;
     }
 
     public void appendParkingBoy(ParkingBoy parkingBoy) {
