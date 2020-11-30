@@ -9,6 +9,7 @@ import com.oocl.cultivation.strategy.StandardParkingStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ParkingLotServiceManager extends ParkingBoy {
     private final List<ParkingBoy> managedParkingBoys;
@@ -39,7 +40,15 @@ public class ParkingLotServiceManager extends ParkingBoy {
         throw new NotEnoughPositionException();
     }
 
-    public Car fetchCarWithAssignedParkingBoy(Ticket ticket, ParkingBoy parkingBoy) throws UnrecognizedParkingTicketException {
-        return parkingBoy.fetchCar(ticket);
+    public Car fetchCarWithAssignedParkingBoy(Ticket ticket) throws UnrecognizedParkingTicketException {
+        Optional<ParkingBoy> assignedParkingBoy = this.getManagedParkingBoys().stream()
+            .filter(parkingBoy -> parkingBoy.getCarParkedParkingLot(ticket).isPresent())
+            .findFirst();
+
+        if (assignedParkingBoy.isPresent()) {
+            return assignedParkingBoy.get().fetchCar(ticket);
+        }
+
+        throw new UnrecognizedParkingTicketException();
     }
 }
