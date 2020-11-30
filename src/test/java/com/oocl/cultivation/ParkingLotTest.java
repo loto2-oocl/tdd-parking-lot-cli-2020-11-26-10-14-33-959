@@ -173,4 +173,16 @@ class ParkingLotTest {
         // THEN
         assertEquals(0.5, actual);
     }
+
+    @Test
+    void should_return_true_when_is_parking_lot_available_give_a_parking_lot_with_10_remaining_capacity() {
+        // GIVEN
+        ParkingLot parkingLot = new ParkingLot(10);
+
+        // WHEN
+        boolean actual = parkingLot.isParkingLotAvailable();
+
+        // THEN
+        assertEquals(true, actual);
+    }
 }
