@@ -57,6 +57,7 @@ public class ParkingBoy {
     }
 
     public boolean hasAvailableParkingLot() {
-        return false;
+        return this.getParkingLots().stream()
+            .anyMatch(parkingLot -> parkingLot.getRemainingCapacity() > 0);
     }
 }
