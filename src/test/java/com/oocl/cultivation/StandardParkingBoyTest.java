@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
@@ -157,6 +158,20 @@ class StandardParkingBoyTest {
             , "Unrecognized parking ticket."
         );
 
+    }
+
+    @Test
+    void should_return_true_when_has_available_parking_lot_given_a_parking_boy_and_parking_lot_with_10_remaining_capacity() {
+        // GIVEN
+        ParkingLot parkingLot = Mockito.mock(ParkingLot.class);
+        when(parkingLot.getRemainingCapacity()).thenReturn(10);
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(new ArrayList<>(Arrays.asList(parkingLot)));
+
+        // WHEN
+        boolean actual = standardParkingBoy.hasAvailableParkingLot();
+
+        // THEN
+        assertEquals(true, actual);
     }
 }
 

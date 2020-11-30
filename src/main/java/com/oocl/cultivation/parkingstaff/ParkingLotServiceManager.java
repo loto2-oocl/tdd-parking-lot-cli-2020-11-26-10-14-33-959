@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class ParkingLotServiceManager extends ParkingBoy {
-    private final List<ParkingBoy> managedParkingBoys;
+public class ParkingLotServiceManager extends StandardParkingBoy {
+    private final List<StandardParkingBoy> managedParkingBoys;
 
     public ParkingLotServiceManager(List<ParkingLot> parkingLots) {
         super(parkingLots);
@@ -20,17 +20,17 @@ public class ParkingLotServiceManager extends ParkingBoy {
         this.managedParkingBoys = new ArrayList<>();
     }
 
-    public List<ParkingBoy> getManagedParkingBoys() {
+    public List<StandardParkingBoy> getManagedParkingBoys() {
         return this.managedParkingBoys;
     }
 
-    public void appendParkingBoy(ParkingBoy parkingBoy) {
+    public void appendParkingBoy(StandardParkingBoy parkingBoy) {
         this.getManagedParkingBoys().add(parkingBoy);
     }
 
     public Ticket parkWithAssignedParkingBoy(Car car) throws NotEnoughPositionException {
-        Optional<ParkingBoy> assignedParkingBoy = this.getManagedParkingBoys().stream()
-            .filter(ParkingBoy::hasAvailableParkingLot)
+        Optional<StandardParkingBoy> assignedParkingBoy = this.getManagedParkingBoys().stream()
+            .filter(StandardParkingBoy::hasAvailableParkingLot)
             .findAny();
 
         if (assignedParkingBoy.isPresent()) {
@@ -41,7 +41,7 @@ public class ParkingLotServiceManager extends ParkingBoy {
     }
 
     public Car fetchCarWithAssignedParkingBoy(Ticket ticket) throws UnrecognizedParkingTicketException {
-        Optional<ParkingBoy> assignedParkingBoy = this.getManagedParkingBoys().stream()
+        Optional<StandardParkingBoy> assignedParkingBoy = this.getManagedParkingBoys().stream()
             .filter(parkingBoy -> parkingBoy.getFetchingStrategy().getCarParkedParkingLot(ticket, parkingBoy.getParkingLots()).isPresent())
             .findFirst();
 

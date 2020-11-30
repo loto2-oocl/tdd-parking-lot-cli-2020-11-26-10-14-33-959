@@ -5,7 +5,7 @@ import com.oocl.cultivation.strategy.parking.SuperSmartParkingStrategy;
 
 import java.util.List;
 
-public class SuperSmartParkingBoy extends ParkingBoy {
+public class SuperSmartParkingBoy extends StandardParkingBoy {
     public SuperSmartParkingBoy(List<ParkingLot> parkingLots) {
         super(parkingLots);
         this.setParkingStrategy(new SuperSmartParkingStrategy());

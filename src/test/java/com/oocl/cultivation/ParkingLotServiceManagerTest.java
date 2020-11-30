@@ -2,7 +2,6 @@ package com.oocl.cultivation;
 
 import com.oocl.cultivation.exception.NotEnoughPositionException;
 import com.oocl.cultivation.exception.UnrecognizedParkingTicketException;
-import com.oocl.cultivation.parkingstaff.ParkingBoy;
 import com.oocl.cultivation.parkingstaff.ParkingLotServiceManager;
 import com.oocl.cultivation.parkingstaff.StandardParkingBoy;
 import com.oocl.cultivation.strategy.fetching.StandardFetchingStrategy;
@@ -22,31 +21,31 @@ class ParkingLotServiceManagerTest {
     @Test
     void should_append_one_parking_boy_to_managed_parking_boy_list_when_append_parking_boy_given_a_service_manager_and_a_parking_boy() {
         // GIVEN
-        ParkingBoy parkingBoy = new ParkingBoy(new ArrayList<>());
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(new ArrayList<>());
         ParkingLotServiceManager parkingLotServiceManager = new ParkingLotServiceManager(new ArrayList<>());
 
         // WHEN
-        parkingLotServiceManager.appendParkingBoy(parkingBoy);
+        parkingLotServiceManager.appendParkingBoy(standardParkingBoy);
 
         // THEN
-        assertTrue(parkingLotServiceManager.getManagedParkingBoys().contains(parkingBoy));
+        assertTrue(parkingLotServiceManager.getManagedParkingBoys().contains(standardParkingBoy));
     }
 
     @Test
     void should_assigned_parking_boy_call_park_once_when_park_with_assigned_parking_boy_given_a_car_and_a_manager_and_a_parking_boy()
         throws NotEnoughPositionException {
         // GIVEN
-        ParkingBoy parkingBoy = Mockito.mock(ParkingBoy.class);
-        when(parkingBoy.hasAvailableParkingLot()).thenReturn(true);
+        StandardParkingBoy standardParkingBoy = Mockito.mock(StandardParkingBoy.class);
+        when(standardParkingBoy.hasAvailableParkingLot()).thenReturn(true);
         ParkingLotServiceManager parkingLotServiceManager = new ParkingLotServiceManager(new ArrayList<>());
-        parkingLotServiceManager.appendParkingBoy(parkingBoy);
+        parkingLotServiceManager.appendParkingBoy(standardParkingBoy);
         Car car = new Car();
 
         // WHEN
         parkingLotServiceManager.parkWithAssignedParkingBoy(car);
 
         // Then
-        verify(parkingBoy, times(1)).park(car);
+        verify(standardParkingBoy, times(1)).park(car);
     }
 
     @Test
@@ -54,21 +53,21 @@ class ParkingLotServiceManagerTest {
         throws UnrecognizedParkingTicketException {
         // GIVEN
         ParkingLot parkingLot = Mockito.mock(ParkingLot.class);
-        ParkingBoy parkingBoy = Mockito.mock(ParkingBoy.class);
+        StandardParkingBoy standardParkingBoy = Mockito.mock(StandardParkingBoy.class);
 
         ParkingLotServiceManager parkingLotServiceManager = new ParkingLotServiceManager(new ArrayList<>());
-        parkingLotServiceManager.appendParkingBoy(parkingBoy);
+        parkingLotServiceManager.appendParkingBoy(standardParkingBoy);
         Ticket ticket = new Ticket();
 
-        when(parkingBoy.getFetchingStrategy()).thenReturn(new StandardFetchingStrategy());
-        when(parkingBoy.getParkingLots()).thenReturn(Collections.singletonList(parkingLot));
+        when(standardParkingBoy.getFetchingStrategy()).thenReturn(new StandardFetchingStrategy());
+        when(standardParkingBoy.getParkingLots()).thenReturn(Collections.singletonList(parkingLot));
         when(parkingLot.isInParkingLot(ticket)).thenReturn(true);
 
         // WHEN
         parkingLotServiceManager.fetchCarWithAssignedParkingBoy(ticket);
 
         // Then
-        verify(parkingBoy, times(1)).fetchCar(ticket);
+        verify(standardParkingBoy, times(1)).fetchCar(ticket);
     }
 
     @Test
@@ -97,9 +96,9 @@ class ParkingLotServiceManagerTest {
         // GIVEN
         ParkingLot parkingLot = Mockito.mock(ParkingLot.class);
         List<ParkingLot> parkingLots = new ArrayList<>(Arrays.asList(parkingLot));
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
         ParkingLotServiceManager parkingLotServiceManager = new ParkingLotServiceManager(new ArrayList<>());
-        parkingLotServiceManager.appendParkingBoy(parkingBoy);
+        parkingLotServiceManager.appendParkingBoy(standardParkingBoy);
         Ticket fakeTicket = new Ticket();
         when(parkingLot.isInParkingLot(fakeTicket)).thenReturn(false);
 
