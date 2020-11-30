@@ -162,4 +162,17 @@ class ParkingLotTest {
         );
 
     }
+
+    @Test
+    void should_return_9_when_get_remaining_capacity_given_a_parking_lot_when_capacity_10_and_1_car_parked() throws NotEnoughPositionException {
+        // GIVEN
+        ParkingLot parkingLot = new ParkingLot(10);
+        parkingLot.park(new Car());
+
+        // WHEN
+        Integer actual = parkingLot.getRemainingCapacity();
+
+        // THEN
+        assertEquals(9, actual);
+    }
 }
