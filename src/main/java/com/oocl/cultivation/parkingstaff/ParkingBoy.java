@@ -5,9 +5,9 @@ import com.oocl.cultivation.ParkingLot;
 import com.oocl.cultivation.Ticket;
 import com.oocl.cultivation.exception.NotEnoughPositionException;
 import com.oocl.cultivation.exception.UnrecognizedParkingTicketException;
-import com.oocl.cultivation.strategy.FetchingStrategy;
-import com.oocl.cultivation.strategy.ParkingStrategy;
-import com.oocl.cultivation.strategy.StandardFetchingStrategy;
+import com.oocl.cultivation.strategy.fetching.FetchingStrategy;
+import com.oocl.cultivation.strategy.parking.ParkingStrategy;
+import com.oocl.cultivation.strategy.fetching.StandardFetchingStrategy;
 
 import java.util.List;
 import java.util.Optional;

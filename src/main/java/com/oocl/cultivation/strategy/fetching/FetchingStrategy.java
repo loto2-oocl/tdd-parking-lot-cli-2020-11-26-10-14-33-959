@@ -1,4 +1,4 @@
-package com.oocl.cultivation.strategy;
+package com.oocl.cultivation.strategy.fetching;
 
 import com.oocl.cultivation.ParkingLot;
 import com.oocl.cultivation.Ticket;

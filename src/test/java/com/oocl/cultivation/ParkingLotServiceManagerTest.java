@@ -5,7 +5,7 @@ import com.oocl.cultivation.exception.UnrecognizedParkingTicketException;
 import com.oocl.cultivation.parkingstaff.ParkingBoy;
 import com.oocl.cultivation.parkingstaff.ParkingLotServiceManager;
 import com.oocl.cultivation.parkingstaff.StandardParkingBoy;
-import com.oocl.cultivation.strategy.StandardFetchingStrategy;
+import com.oocl.cultivation.strategy.fetching.StandardFetchingStrategy;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 

@@ -5,7 +5,7 @@ import com.oocl.cultivation.ParkingLot;
 import com.oocl.cultivation.Ticket;
 import com.oocl.cultivation.exception.NotEnoughPositionException;
 import com.oocl.cultivation.exception.UnrecognizedParkingTicketException;
-import com.oocl.cultivation.strategy.StandardParkingStrategy;
+import com.oocl.cultivation.strategy.parking.StandardParkingStrategy;
 
 import java.util.ArrayList;
 import java.util.List;

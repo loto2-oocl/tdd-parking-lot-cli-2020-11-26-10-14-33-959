@@ -1,7 +1,7 @@
 package com.oocl.cultivation.parkingstaff;
 
 import com.oocl.cultivation.ParkingLot;
-import com.oocl.cultivation.strategy.SmartParkingStrategy;
+import com.oocl.cultivation.strategy.parking.SmartParkingStrategy;
 
 import java.util.List;
 
