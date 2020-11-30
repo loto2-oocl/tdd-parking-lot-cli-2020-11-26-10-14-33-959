@@ -1,5 +1,8 @@
-package com.oocl.cultivation;
+package com.oocl.cultivation.parkingstaff;
 
+import com.oocl.cultivation.Car;
+import com.oocl.cultivation.ParkingLot;
+import com.oocl.cultivation.Ticket;
 import com.oocl.cultivation.exception.NotEnoughPositionException;
 import com.oocl.cultivation.exception.UnrecognizedParkingTicketException;
 import com.oocl.cultivation.strategy.ParkingStrategy;
@@ -8,11 +11,11 @@ import com.oocl.cultivation.strategy.StandardParkingStrategy;
 import java.util.List;
 import java.util.Optional;
 
-public class StandardParkingBoy {
+public class ParkingBoy {
     protected final List<ParkingLot> parkingLots;
     protected ParkingStrategy parkingStrategy;
 
-    public StandardParkingBoy(List<ParkingLot> parkingLots) {
+    public ParkingBoy(List<ParkingLot> parkingLots) {
         this.parkingLots = parkingLots;
         this.setParkingStrategy(new StandardParkingStrategy());
     }

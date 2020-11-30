@@ -1,6 +1,7 @@
 package com.oocl.cultivation;
 
 import com.oocl.cultivation.exception.NotEnoughPositionException;
+import com.oocl.cultivation.parkingstaff.SmartParkingBoy;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 

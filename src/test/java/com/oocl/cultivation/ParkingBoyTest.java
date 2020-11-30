@@ -2,6 +2,7 @@ package com.oocl.cultivation;
 
 import com.oocl.cultivation.exception.NotEnoughPositionException;
 import com.oocl.cultivation.exception.UnrecognizedParkingTicketException;
+import com.oocl.cultivation.parkingstaff.ParkingBoy;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -12,7 +13,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
-class StandardParkingBoyTest {
+class ParkingBoyTest {
     @Test
     void should_parking_boy_call_parking_lot_park_function_when_park_the_car_given_parking_boy_with_one_parking_lot()
         throws NotEnoughPositionException {
@@ -22,11 +23,11 @@ class StandardParkingBoyTest {
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(parkingLot);
 
-        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         Car car = new Car();
 
         // When
-        standardParkingBoy.park(car);
+        parkingBoy.park(car);
 
         // Then
         verify(parkingLot, times(1)).park(car);
@@ -39,12 +40,12 @@ class StandardParkingBoyTest {
         List<ParkingLot> parkingLots = new ArrayList<>();
         ParkingLot parkingLot = Mockito.mock(ParkingLot.class);
         parkingLots.add(parkingLot);
-        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         Ticket ticket = new Ticket();
         when(parkingLot.isInParkingLot(ticket)).thenReturn(true);
 
         // WHEN
-        standardParkingBoy.fetchCar(ticket);
+        parkingBoy.fetchCar(ticket);
 
         // THEN
         verify(parkingLot, times(1)).fetchCar(ticket);
@@ -60,11 +61,11 @@ class StandardParkingBoyTest {
         when(parkingLot1.isParkingLotAvailable()).thenReturn(true);
         when(parkingLot2.isParkingLotAvailable()).thenReturn(true);
 
-        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         Car car = new Car();
 
         // WHEN
-        standardParkingBoy.park(car);
+        parkingBoy.park(car);
 
         // THEN
         verify(parkingLot1, times(1)).park(car);
@@ -80,11 +81,11 @@ class StandardParkingBoyTest {
         when(parkingLot1.isParkingLotAvailable()).thenReturn(false);
         when(parkingLot2.isParkingLotAvailable()).thenReturn(true);
 
-        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         Car car = new Car();
 
         // WHEN
-        standardParkingBoy.park(car);
+        parkingBoy.park(car);
 
         // THEN
         verify(parkingLot2, times(1)).park(car);
@@ -99,14 +100,14 @@ class StandardParkingBoyTest {
         when(parkingLot1.isParkingLotAvailable()).thenReturn(false);
         when(parkingLot2.isParkingLotAvailable()).thenReturn(false);
 
-        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
 
         // THEN
         assertThrows(
             NotEnoughPositionException.class,
             () -> {
                 // WHEN
-                standardParkingBoy.park(new Car());
+                parkingBoy.park(new Car());
             }
             , "Not enough position."
         );
@@ -114,7 +115,7 @@ class StandardParkingBoyTest {
 
     @Test
     void should_fetch_car_from_second_car_park_when_fetch_car_given_a_ticket_and_parking_boy_with_two_parking_lot_and_one_parked_the_target_car()
-        throws NotEnoughPositionException, UnrecognizedParkingTicketException {
+        throws UnrecognizedParkingTicketException {
         // GIVEN
         Ticket ticket = new Ticket();
         Car car = new Car();
@@ -124,10 +125,10 @@ class StandardParkingBoyTest {
         when(parkingLot1.isInParkingLot(ticket)).thenReturn(false);
         when(parkingLot2.isInParkingLot(ticket)).thenReturn(true);
 
-        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
 
         // WHEN
-        standardParkingBoy.fetchCar(ticket);
+        parkingBoy.fetchCar(ticket);
 
         // THEN
         verify(parkingLot2, times(1)).fetchCar(ticket);
@@ -144,14 +145,14 @@ class StandardParkingBoyTest {
         when(parkingLot1.isInParkingLot(fakeTicket)).thenReturn(false);
         when(parkingLot2.isInParkingLot(fakeTicket)).thenReturn(false);
 
-        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
 
         // THEN
         assertThrows(
             UnrecognizedParkingTicketException.class,
             () -> {
                 // WHEN
-                standardParkingBoy.fetchCar(fakeTicket);
+                parkingBoy.fetchCar(fakeTicket);
             }
             , "Unrecognized parking ticket."
         );
