@@ -30,7 +30,7 @@ public class ParkingBoy {
         return this.parkingStrategy;
     }
 
-    protected Optional<ParkingLot> getCarParkedParkingLot(Ticket ticket) {
+    public Optional<ParkingLot> getCarParkedParkingLot(Ticket ticket) {
         return this.getParkingLots().stream()
             .filter(parkingLot -> parkingLot.isInParkingLot(ticket))
             .findFirst();
@@ -54,5 +54,9 @@ public class ParkingBoy {
         }
 
         return targetedParkingLot.get().fetchCar(ticket);
+    }
+
+    public boolean hasAvailableCarPark() {
+        return false;
     }
 }

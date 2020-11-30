@@ -13,8 +13,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 class ParkingLotServiceManagerTest {
     @Test
@@ -35,11 +34,13 @@ class ParkingLotServiceManagerTest {
         throws NotEnoughPositionException {
         // GIVEN
         ParkingBoy parkingBoy = Mockito.mock(ParkingBoy.class);
+        when(parkingBoy.hasAvailableCarPark()).thenReturn(true);
         ParkingLotServiceManager parkingLotServiceManager = new ParkingLotServiceManager(new ArrayList<>());
+        parkingLotServiceManager.appendParkingBoy(parkingBoy);
         Car car = new Car();
 
         // WHEN
-        parkingLotServiceManager.parkWithAssignedParkingBoy(car, parkingBoy);
+        parkingLotServiceManager.parkWithAssignedParkingBoy(car);
 
         // Then
         verify(parkingBoy, times(1)).park(car);
@@ -75,7 +76,7 @@ class ParkingLotServiceManagerTest {
             NotEnoughPositionException.class,
             () -> {
                 // WHEN
-                parkingLotServiceManager.parkWithAssignedParkingBoy(new Car(), standardParkingBoy);
+                parkingLotServiceManager.parkWithAssignedParkingBoy(new Car());
             }
             , "Not Enough Position."
         );
