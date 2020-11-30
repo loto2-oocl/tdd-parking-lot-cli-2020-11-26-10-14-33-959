@@ -27,8 +27,16 @@ public class ParkingLotServiceManager extends ParkingBoy {
         this.getManagedParkingBoys().add(parkingBoy);
     }
 
-    public Ticket parkWithAssignedParkingBoy(Car car, ParkingBoy parkingBoy) throws NotEnoughPositionException {
-        return parkingBoy.park(car);
+    public Ticket parkWithAssignedParkingBoy(Car car) throws NotEnoughPositionException {
+        Optional<ParkingBoy> assignedParkingBoy = this.getManagedParkingBoys().stream()
+            .filter(ParkingBoy::hasAvailableCarPark)
+            .findAny();
+
+        if (assignedParkingBoy.isPresent()) {
+            return assignedParkingBoy.get().park(car);
+        }
+
+        throw new NotEnoughPositionException();
     }
 
     public Car fetchCarWithAssignedParkingBoy(Ticket ticket, ParkingBoy parkingBoy) throws UnrecognizedParkingTicketException {
