@@ -9,7 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -51,11 +53,14 @@ class ParkingLotServiceManagerTest {
         throws UnrecognizedParkingTicketException {
         // GIVEN
         ParkingBoy parkingBoy = Mockito.mock(ParkingBoy.class);
+        Optional<ParkingLot> optionalParkingLot = Optional.of(Mockito.mock(ParkingLot.class));
         ParkingLotServiceManager parkingLotServiceManager = new ParkingLotServiceManager(new ArrayList<>());
+        parkingLotServiceManager.appendParkingBoy(parkingBoy);
         Ticket ticket = new Ticket();
+        when(parkingBoy.getCarParkedParkingLot(ticket)).thenReturn(optionalParkingLot);
 
         // WHEN
-        parkingLotServiceManager.fetchCarWithAssignedParkingBoy(ticket, parkingBoy);
+        parkingLotServiceManager.fetchCarWithAssignedParkingBoy(ticket);
 
         // Then
         verify(parkingBoy, times(1)).fetchCar(ticket);
@@ -85,17 +90,20 @@ class ParkingLotServiceManagerTest {
     @Test
     void should_throw_unrecognized_ticket_exception_when_fetch_car_with_assigned_parking_boy_given_a_fake_ticket_a_manager_and_parking_boy() {
         // GIVEN
-        ParkingBoy parkingBoy = new ParkingBoy(new ArrayList<>());
+        ParkingLot parkingLot = Mockito.mock(ParkingLot.class);
+        List<ParkingLot> parkingLots = new ArrayList<>(Arrays.asList(parkingLot));
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         ParkingLotServiceManager parkingLotServiceManager = new ParkingLotServiceManager(new ArrayList<>());
         parkingLotServiceManager.appendParkingBoy(parkingBoy);
         Ticket fakeTicket = new Ticket();
+        when(parkingLot.isInParkingLot(fakeTicket)).thenReturn(false);
 
         // THEN
         assertThrows(
             UnrecognizedParkingTicketException.class,
             () -> {
                 // WHEN
-                parkingLotServiceManager.fetchCarWithAssignedParkingBoy(fakeTicket, parkingBoy);
+                parkingLotServiceManager.fetchCarWithAssignedParkingBoy(fakeTicket);
             }
             , "Unrecognized parking ticket."
         );
