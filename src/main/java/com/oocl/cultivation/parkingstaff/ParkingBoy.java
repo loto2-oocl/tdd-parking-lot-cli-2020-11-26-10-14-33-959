@@ -5,7 +5,9 @@ import com.oocl.cultivation.ParkingLot;
 import com.oocl.cultivation.Ticket;
 import com.oocl.cultivation.exception.NotEnoughPositionException;
 import com.oocl.cultivation.exception.UnrecognizedParkingTicketException;
+import com.oocl.cultivation.strategy.FetchingStrategy;
 import com.oocl.cultivation.strategy.ParkingStrategy;
+import com.oocl.cultivation.strategy.StandardFetchingStrategy;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,13 +15,23 @@ import java.util.Optional;
 public class ParkingBoy {
     protected final List<ParkingLot> parkingLots;
     protected ParkingStrategy parkingStrategy;
+    protected FetchingStrategy fetchingStrategy;
 
     public ParkingBoy(List<ParkingLot> parkingLots) {
         this.parkingLots = parkingLots;
+        this.setFetchingStrategy(new StandardFetchingStrategy());
     }
 
     public void setParkingStrategy(ParkingStrategy parkingStrategy) {
         this.parkingStrategy = parkingStrategy;
+    }
+
+    public void setFetchingStrategy(FetchingStrategy fetchingStrategy) {
+        this.fetchingStrategy = fetchingStrategy;
+    }
+
+    public FetchingStrategy getFetchingStrategy() {
+        return fetchingStrategy;
     }
 
     public List<ParkingLot> getParkingLots() {
@@ -28,12 +40,6 @@ public class ParkingBoy {
 
     public ParkingStrategy getParkingStrategy() {
         return this.parkingStrategy;
-    }
-
-    public Optional<ParkingLot> getCarParkedParkingLot(Ticket ticket) {
-        return this.getParkingLots().stream()
-            .filter(parkingLot -> parkingLot.isInParkingLot(ticket))
-            .findFirst();
     }
 
     public Ticket park(Car car) throws NotEnoughPositionException {
@@ -47,7 +53,7 @@ public class ParkingBoy {
     }
 
     public Car fetchCar(Ticket ticket) throws UnrecognizedParkingTicketException {
-        Optional<ParkingLot> targetedParkingLot = getCarParkedParkingLot(ticket);
+        Optional<ParkingLot> targetedParkingLot = this.getFetchingStrategy().getCarParkedParkingLot(ticket, this.getParkingLots());
 
         if (!targetedParkingLot.isPresent()) {
             throw new UnrecognizedParkingTicketException();

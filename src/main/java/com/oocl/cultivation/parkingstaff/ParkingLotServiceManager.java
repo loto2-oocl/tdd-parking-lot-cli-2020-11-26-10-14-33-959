@@ -42,7 +42,7 @@ public class ParkingLotServiceManager extends ParkingBoy {
 
     public Car fetchCarWithAssignedParkingBoy(Ticket ticket) throws UnrecognizedParkingTicketException {
         Optional<ParkingBoy> assignedParkingBoy = this.getManagedParkingBoys().stream()
-            .filter(parkingBoy -> parkingBoy.getCarParkedParkingLot(ticket).isPresent())
+            .filter(parkingBoy -> parkingBoy.getFetchingStrategy().getCarParkedParkingLot(ticket, parkingBoy.getParkingLots()).isPresent())
             .findFirst();
 
         if (assignedParkingBoy.isPresent()) {

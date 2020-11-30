@@ -5,13 +5,14 @@ import com.oocl.cultivation.exception.UnrecognizedParkingTicketException;
 import com.oocl.cultivation.parkingstaff.ParkingBoy;
 import com.oocl.cultivation.parkingstaff.ParkingLotServiceManager;
 import com.oocl.cultivation.parkingstaff.StandardParkingBoy;
+import com.oocl.cultivation.strategy.StandardFetchingStrategy;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -52,12 +53,16 @@ class ParkingLotServiceManagerTest {
     void should_assigned_parking_boy_call_fetch_once_when_fetch_car_with_assigned_parking_boy_given_a_ticket_and_a_manager_and_a_parking_boy()
         throws UnrecognizedParkingTicketException {
         // GIVEN
+        ParkingLot parkingLot = Mockito.mock(ParkingLot.class);
         ParkingBoy parkingBoy = Mockito.mock(ParkingBoy.class);
-        Optional<ParkingLot> optionalParkingLot = Optional.of(Mockito.mock(ParkingLot.class));
+
         ParkingLotServiceManager parkingLotServiceManager = new ParkingLotServiceManager(new ArrayList<>());
         parkingLotServiceManager.appendParkingBoy(parkingBoy);
         Ticket ticket = new Ticket();
-        when(parkingBoy.getCarParkedParkingLot(ticket)).thenReturn(optionalParkingLot);
+
+        when(parkingBoy.getFetchingStrategy()).thenReturn(new StandardFetchingStrategy());
+        when(parkingBoy.getParkingLots()).thenReturn(Collections.singletonList(parkingLot));
+        when(parkingLot.isInParkingLot(ticket)).thenReturn(true);
 
         // WHEN
         parkingLotServiceManager.fetchCarWithAssignedParkingBoy(ticket);
