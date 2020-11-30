@@ -37,10 +37,6 @@ public class ParkingLot {
     }
 
     public Car fetchCar(Ticket ticket) throws UnrecognizedParkingTicketException {
-        if (ticket.isUsed()) {
-            throw new UnrecognizedParkingTicketException();
-        }
-
         if (this.isInParkingLot(ticket)) {
             ticket.setUsed();
             return this.ticketCarHashMap.remove(ticket);
