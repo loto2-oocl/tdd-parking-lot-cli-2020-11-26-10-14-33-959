@@ -36,7 +36,7 @@ class ParkingLotServiceManagerTest {
         throws NotEnoughPositionException {
         // GIVEN
         ParkingBoy parkingBoy = Mockito.mock(ParkingBoy.class);
-        when(parkingBoy.hasAvailableCarPark()).thenReturn(true);
+        when(parkingBoy.hasAvailableParkingLot()).thenReturn(true);
         ParkingLotServiceManager parkingLotServiceManager = new ParkingLotServiceManager(new ArrayList<>());
         parkingLotServiceManager.appendParkingBoy(parkingBoy);
         Car car = new Car();

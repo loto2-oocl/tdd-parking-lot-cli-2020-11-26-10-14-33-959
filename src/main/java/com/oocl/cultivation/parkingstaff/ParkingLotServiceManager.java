@@ -30,7 +30,7 @@ public class ParkingLotServiceManager extends ParkingBoy {
 
     public Ticket parkWithAssignedParkingBoy(Car car) throws NotEnoughPositionException {
         Optional<ParkingBoy> assignedParkingBoy = this.getManagedParkingBoys().stream()
-            .filter(ParkingBoy::hasAvailableCarPark)
+            .filter(ParkingBoy::hasAvailableParkingLot)
             .findAny();
 
         if (assignedParkingBoy.isPresent()) {

@@ -56,7 +56,7 @@ public class ParkingBoy {
         return targetedParkingLot.get().fetchCar(ticket);
     }
 
-    public boolean hasAvailableCarPark() {
+    public boolean hasAvailableParkingLot() {
         return false;
     }
 }
