@@ -23,10 +23,6 @@ public class ParkingLot {
             throw new NotEnoughPositionException();
         }
 
-        if (isParkedInThisParkingLot(car)) {
-            return null;
-        }
-
         Ticket ticket = new Ticket();
         ticketCarHashMap.put(ticket, car);
         return ticket;

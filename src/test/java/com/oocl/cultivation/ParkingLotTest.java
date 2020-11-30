@@ -96,22 +96,6 @@ class ParkingLotTest {
     }
 
     @Test
-    void should_return_null_when_park_car_twice_with_same_car_given_a_car_and_enough_capacity() throws NotEnoughPositionException {
-        // GIVEN
-        Car car = new Car();
-        ParkingLot parkingLot = new ParkingLot(2);
-
-        // WHEN
-        Ticket ticket1 = parkingLot.park(car);
-        Ticket ticket2 = parkingLot.park(car);
-
-        // THEN
-        assertTrue(parkingLot.getTicketCarHashMap().containsKey(ticket1));
-        assertEquals(car, parkingLot.getTicketCarHashMap().get(ticket1));
-        assertNull(ticket2);
-    }
-
-    @Test
     void should_return_a_car_and_ticket_is_used_when_fetch_car_with_a_ticket_and_parked_in_parking_lot()
         throws UnrecognizedParkingTicketException, NotEnoughPositionException {
         // GIVEN
