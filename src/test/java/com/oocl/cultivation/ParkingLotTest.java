@@ -175,4 +175,18 @@ class ParkingLotTest {
         // THEN
         assertEquals(9, actual);
     }
+
+    @Test
+    void should_return_0_point_5_when_get_available_position_rate_given_a_parking_lot_with_capacity_2_and_1_car_parked()
+        throws NotEnoughPositionException {
+        // GIVEN
+        ParkingLot parkingLot = new ParkingLot(2);
+        parkingLot.park(new Car());
+
+        // WHEN
+        Double actual = parkingLot.getAvailablePositionRate();
+
+        // THEN
+        assertEquals(0.5, actual);
+    }
 }
