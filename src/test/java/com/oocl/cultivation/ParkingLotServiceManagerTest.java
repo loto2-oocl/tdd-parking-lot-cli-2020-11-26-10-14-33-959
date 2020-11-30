@@ -4,6 +4,7 @@ import com.oocl.cultivation.exception.NotEnoughPositionException;
 import com.oocl.cultivation.exception.UnrecognizedParkingTicketException;
 import com.oocl.cultivation.parkingstaff.ParkingBoy;
 import com.oocl.cultivation.parkingstaff.ParkingLotServiceManager;
+import com.oocl.cultivation.parkingstaff.StandardParkingBoy;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -15,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-public class ParkingLotServiceManagerTest {
+class ParkingLotServiceManagerTest {
     @Test
     void should_append_one_parking_boy_to_managed_parking_boy_list_when_append_parking_boy_given_a_service_manager_and_a_parking_boy() {
         // GIVEN
@@ -65,16 +66,16 @@ public class ParkingLotServiceManagerTest {
         ParkingLot parkingLot1 = new ParkingLot(0);
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(parkingLot1);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
         ParkingLotServiceManager parkingLotServiceManager = new ParkingLotServiceManager(new ArrayList<>());
-        parkingLotServiceManager.appendParkingBoy(parkingBoy);
+        parkingLotServiceManager.appendParkingBoy(standardParkingBoy);
 
         // THEN
         assertThrows(
             NotEnoughPositionException.class,
             () -> {
                 // WHEN
-                parkingLotServiceManager.parkWithAssignedParkingBoy(new Car(), parkingBoy);
+                parkingLotServiceManager.parkWithAssignedParkingBoy(new Car(), standardParkingBoy);
             }
             , "Not Enough Position."
         );

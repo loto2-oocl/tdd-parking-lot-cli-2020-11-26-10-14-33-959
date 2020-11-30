@@ -11,7 +11,7 @@ import java.util.List;
 
 import static org.mockito.Mockito.*;
 
-public class SuperSmartParkingBoyTest {
+class SuperSmartParkingBoyTest {
     @Test
     void should_park_at_first_car_park_when_park_given_a_car_and_super_smart_parking_boy_with_two_parking_lots_when_first_has_larger_available_position_rate()
         throws NotEnoughPositionException {

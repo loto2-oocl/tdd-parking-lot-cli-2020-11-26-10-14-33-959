@@ -6,7 +6,6 @@ import com.oocl.cultivation.Ticket;
 import com.oocl.cultivation.exception.NotEnoughPositionException;
 import com.oocl.cultivation.exception.UnrecognizedParkingTicketException;
 import com.oocl.cultivation.strategy.ParkingStrategy;
-import com.oocl.cultivation.strategy.StandardParkingStrategy;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,7 +16,6 @@ public class ParkingBoy {
 
     public ParkingBoy(List<ParkingLot> parkingLots) {
         this.parkingLots = parkingLots;
-        this.setParkingStrategy(new StandardParkingStrategy());
     }
 
     public void setParkingStrategy(ParkingStrategy parkingStrategy) {
@@ -30,6 +28,12 @@ public class ParkingBoy {
 
     public ParkingStrategy getParkingStrategy() {
         return parkingStrategy;
+    }
+
+    protected Optional<ParkingLot> getCarParkedParkingLot(Ticket ticket) {
+        return this.getParkingLots().stream()
+            .filter(parkingLot -> parkingLot.isInParkingLot(ticket))
+            .findFirst();
     }
 
     public Ticket park(Car car) throws NotEnoughPositionException {
@@ -50,11 +54,5 @@ public class ParkingBoy {
         }
 
         return targetedParkingLot.get().fetchCar(ticket);
-    }
-
-    private Optional<ParkingLot> getCarParkedParkingLot(Ticket ticket) {
-        return this.getParkingLots().stream()
-            .filter(parkingLot -> parkingLot.isInParkingLot(ticket))
-            .findFirst();
     }
 }

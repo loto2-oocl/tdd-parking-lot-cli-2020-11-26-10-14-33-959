@@ -5,6 +5,7 @@ import com.oocl.cultivation.ParkingLot;
 import com.oocl.cultivation.Ticket;
 import com.oocl.cultivation.exception.NotEnoughPositionException;
 import com.oocl.cultivation.exception.UnrecognizedParkingTicketException;
+import com.oocl.cultivation.strategy.StandardParkingStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ public class ParkingLotServiceManager extends ParkingBoy {
 
     public ParkingLotServiceManager(List<ParkingLot> parkingLots) {
         super(parkingLots);
+        this.setParkingStrategy(new StandardParkingStrategy());
         this.managedParkingBoys = new ArrayList<>();
     }
 
