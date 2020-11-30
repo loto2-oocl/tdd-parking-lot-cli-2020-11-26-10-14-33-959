@@ -28,10 +28,6 @@ public class ParkingLot {
         return ticket;
     }
 
-    private boolean isParkedInThisParkingLot(Car car) {
-        return this.getTicketCarHashMap().containsValue(car);
-    }
-
     public Car fetchCar(Ticket ticket) throws UnrecognizedParkingTicketException {
         if (this.isInParkingLot(ticket)) {
             ticket.setUsed();
